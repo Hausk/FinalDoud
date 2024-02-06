@@ -59,18 +59,6 @@
   }
 }
 
-.swiper-slide-active .image-card:hover p {
-  scale: 1.2;
-  transition-duration: .3s !important;
-}
-.swiper-slide-active .image-card:hover img {
-  filter: grayscale(10) !important;
-  transition-duration: .5s !important;
-}
-.yarl__slide img {
-  opacity: 0;
-  transition: .5s ease-in;
-}
-.yarl__slide_current img {
-  opacity: 1;
+.test-image:hover .test {
+  display: block;
 }

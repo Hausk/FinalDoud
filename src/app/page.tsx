@@ -1,113 +1,82 @@
-import Image from 'next/image'
+import { TextGenerateEffectDemo } from "@/components/guest/TextGenerated";
+import { MovingBorderDemo } from "@/components/guest/hpButton";
+import { BackgroundGradientAnimation } from "@/components/ui/background-gradient-animation";
+import { Button } from "@/components/ui/moving-border";
+import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
+import { ArrowDown, ArrowDownCircle, ArrowLeftIcon, ArrowRight, CameraIcon, Contact2Icon, HandIcon } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+
+const paragraph = 'Photographe passionnée par la création de souvenirs heureux et émotionnels à travers mes photos. Je suis là pour immortaliser vos moments spéciaux et les rendre encore plus mémorables'
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <BackgroundGradientAnimation>
+      <div className="m-auto w-full md:w-[80%] flex flex-col md:block justify-between h-dvh md:h-1/2">
+        <div className="w-full h-[60dvh] md:h-full flex m-auto flex-col mt-16 md:mt-0">
+          <h1 className="
+            m-auto
+            md:text-center text-9xl
+            font-bold uppercase drop-shadow-xl shadow-gray-50
+            w-full flex h-full flex-col md:flex-row z-50
+          ">
+            <span className="top-0 absolute left-0 md:relative z-10">
+              Libre
+            </span>
+            <span className="top-[20%] absolute right-0 md:relative z-10">
+              &nbsp;&amp;
+            </span>
+            <span className="top-[45%] absolute left-2 flex flex-col text-left z-10">
+              Viv
+            </span>
+            <span className="top-[62%] absolute right-2 -z-40">
+              ant
+            </span>
+            <br/>
+            <span className="top-[80%] absolute left-1/2 -translate-x-1/2 text-5xl z-40">
+              Photographie
+            </span>
+          </h1>
+        </div>
+        <div className="w-[90%] m-auto md:w-1/3 mt-5 flex flex-col">
+          <p className="w-fit md:border-white md:border md:py-2 overflow-hidden m-auto">
+            <span className="md:px-5 md:py-3 flex">Bonjour,&nbsp;je&nbsp;suis&nbsp;<span className="font-semibold">Victoria</span></span></p>
+            <TextGenerateEffect words={paragraph} />
+          <div className="flex justify-between md:justify-normal">
+            <Link href="/works" className="
+              inline-flex h-12 animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#b91c1c,45%,#f87171,55%,#b91c1c)] px-6 font-medium text-white bg-[length:200%_100%] transition-colors
+              text-sm md:text-base
+            ">
+              <ArrowDown/>&nbsp;&nbsp;Voir mon travail
+            </Link>
+            <Link href="/contact" className="ml-5 bg-slate-800 no-underline group cursor-pointer relative shadow-2xl shadow-zinc-900 rounded-md p-px text-xs font-semibold leading-6  text-white inline-block">
+              <span className="absolute inset-0 overflow-hidden rounded-md">
+                <span className="absolute inset-0 rounded-md bg-[image:radial-gradient(75%_100%_at_50%_0%,rgba(56,189,248,0.6)_0%,rgba(56,189,248,0)_75%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100"></span>
+              </span>
+              <div className="h-full w-full relative flex space-x-2 items-center z-10 rounded-md glass bg-gradient-to-tr from-slate-700 to-slate-900 py-0.5 px-4 ring-1 ring-white/10 ">
+                <p className="flex m-auto text-sm md:text-base"><ArrowRight/>&nbsp;&nbsp;Me contacter</p>
+              </div>
+              <span className="absolute -bottom-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-emerald-400/0 via-emerald-400/90 to-emerald-400/0 transition-opacity duration-500 group-hover:opacity-40"></span>
+            </Link>
+          </div>
         </div>
       </div>
-
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
         <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
+          className="absolute z-30 left-1/2 transform -translate-x-1/2 top-[20%] -translate-y-1/4 rounded-[40%] w-[1000px]
+            md:bottom-0 md:w-[27%] md:rounded-none"
+          src="/header.png"
+          alt="Image de fond"
+          width={800}
+          height={1000}
         />
-      </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+        <Image
+          className="absolute z-20 left-1/2 transform -translate-x-1/2 blur-md top-[20%] -translate-y-1/4 rounded-[40%]
+            md:bottom-0 md:w-[27.2%] md:rounded-none"
+          src="/header.png"
+          alt="Image de fond"
+          width={800}
+          height={1000}
+        />
+    </BackgroundGradientAnimation>
   )
 }

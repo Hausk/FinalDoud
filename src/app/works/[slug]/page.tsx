@@ -16,7 +16,10 @@ export default async function Page({ params }: {params: {slug: string}}) {
     return (
         <div className="w-dvh flex">
             <div className="w-[90%] my-20 m-auto">
-                <h1 className="mb-10 text-4xl font-semibold">{data.title}&nbsp;-&nbsp;{data.year}</h1>
+                <h1 className="mb-10 text-4xl font-semibold w-full flex flex-col md:block md:w-auto">
+                    <span className="w-full">{data.title}</span>
+                    <span className="w-full">{data.year}</span>
+                </h1>
                 <PhotoBox images={photos}/>
             </div>
         </div>

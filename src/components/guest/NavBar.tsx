@@ -54,7 +54,7 @@ export function NavBar() {
                           Accueil
                         </Link>
                         <Link href="/works"
-                          className={cn("block rounded-md px-3 py-2 text-4xl font-medium text-left", pathName === '/works' ? 'text-red-500' : 'text-white')}
+                          className={cn("block rounded-md px-3 py-2 text-4xl font-medium text-left", pathName.startsWith('/works') ? 'text-red-500' : 'text-white')}
                         >
                           Projets
                         </Link>

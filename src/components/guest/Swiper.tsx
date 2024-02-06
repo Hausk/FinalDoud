@@ -25,9 +25,10 @@ export function Caroussel({works}:{works:any}) {
         spaceBetween={100}
         modules={[Parallax]}
         breakpoints={{
-            1: {
+            0: {
               slidesPerView: 2,
               direction: 'vertical',
+              spaceBetween: 100,
             },
             580: {
               slidesPerView: 2,

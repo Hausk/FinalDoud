@@ -1,19 +1,13 @@
-import { AlbumArtwork } from "@/components/dashboard/album-artwork";
+import { fetchWork } from "@/actions/fetchWork";
 import { Button } from "@/components/ui/button";
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuTrigger } from "@/components/ui/context-menu";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { worksList } from "@/lib/works";
 import { PlusIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 import { notFound } from 'next/navigation'
 
-export async function fetchWork(slug: string) {
-    const res = worksList.find((p) => p.slug === slug)
-    if (!res) return undefined
-    return res
-}
 export default async function Page({ params }: {params: {slug: string}}) {
     const data = await fetchWork(params.slug)
     if (!data) {

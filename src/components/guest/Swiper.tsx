@@ -1,12 +1,9 @@
 'use client'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import Image from 'next/image';
 import { Parallax } from 'swiper/modules';
 import '@/css/style.css'
-import Link from 'next/link';
-import Button from './button';
-import { useMotionValue, useTransform, motion } from 'framer-motion';
+import { useMotionValue, useTransform } from 'framer-motion';
 import { WorksCard } from './WorksCard';
 
 

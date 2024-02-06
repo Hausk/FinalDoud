@@ -3,10 +3,10 @@ import { notFound } from 'next/navigation'
 import { PhotoBox } from "@/components/guest/PhotoBox";
 import photos from "@/lib/phototest";
 
-export async function fetchWork(slug: string) {
-    const res = worksList.find((p) => p.slug === slug)
-    if (!res) return undefined
-    return res
+async function fetchWork(slug: string) {
+    const res = worksList.find((p) => p.slug === slug);
+    if (!res) return undefined;
+    return res;
 }
 export default async function Page({ params }: {params: {slug: string}}) {
     const data = await fetchWork(params.slug)

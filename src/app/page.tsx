@@ -9,47 +9,45 @@ const paragraph = 'Photographe passionnée par la création de souvenirs heureux
 export default function Home() {
   return (
     <BackgroundGradientAnimation>
-      <div className="m-auto w-full md:w-[80%] flex flex-col md:block justify-between h-dvh md:h-1/2">
-        <div className="w-full h-1/2 md:h-full flex m-auto flex-col mt-16 md:mt-0 overflow-hidden">
+      <div className="m-auto w-full md:w-[80%] flex flex-col md:block justify-between h-full md:h-1/2">
+        <div className="w-full h-1/2 md:h-full flex m-auto flex-col mt-16 md:mt-0">
           <div className="
             m-auto
             md:text-center text-8xl
             font-bold uppercase drop-shadow-xl shadow-gray-50
-            w-full flex h-full flex-col md:flex-row z-50 ju
-            md:text-9xl
+            w-full flex h-full flex-col md:flex-row overflow-hidden
+            md:text-9xl justify-between
           ">
-            <h1 className="left-0 md:relative w-100 text-left z-10">
+            <h1 className="left-0 md:relative w-100 text-left">
               Libre
             </h1>
-            <h1 className="right-0 md:relative w-100 text-end z-10">
+            <h1 className="right-0 md:relative w-100 text-end">
               &nbsp;&amp;
             </h1>
-            <h1 className="left-2 flex flex-col w-100 text-left leading-[0.75] z-40">
-              Viv
+            <h1 className="mx-auto w-100 text-left z-30">
+              Vivant
             </h1>
-            <h1 className="w-100 text-right z-40">
-              ant
-            </h1>
-            <h1 className="text-4xl mx-auto z-40">
+            <h1 className="text-4xl mx-auto z-50 leading-[0.75] backdrop-blur-3xl">
               Photographie
             </h1>
             <Image
-              className="absolute z-30 left-1/2 transform -translate-x-1/2 -translate-y-1/3 rounded-[40%] top-1/4 md:hidden"
+              className="absolute z-20 left-1/2 transform -translate-x-1/2 -translate-y-1/3 rounded-[40%] top-[25%] md:hidden"
               src="/header.png"
               alt="Image de fond"
-              width={800}
-              height={1000}
+              width={400}
+              height={500}
             />
             <Image
-              className="absolute z-20 left-1/2 transform -translate-x-1/2 -translate-y-1/3 rounded-[40%] top-1/4 blur-mdmd:hidden"
+              className="absolute z-10 left-1/2 transform -translate-x-1/2 -translate-y-1/3 rounded-[40%] top-[26%] blur-md md:hidden"
+              style={{perspective: 500}}
               src="/header.png"
               alt="Image de fond"
-              width={810}
-              height={1000}
+              width={400}
+              height={500}
             />
           </div>
         </div>
-        <div className="w-[90%] m-auto md:w-1/3 flex flex-col">
+        <div className="w-[90%] m-auto md:w-1/3 flex flex-col h-fit z-50">
           <p className="w-fit md:border-white md:border md:py-2 overflow-hidden m-auto">
             <span className="md:px-5 md:py-3 flex text-lg">Bonjour,&nbsp;je&nbsp;suis&nbsp;<span className="font-semibold">Victoria</span></span></p>
             <TextGenerateEffect words={paragraph} />

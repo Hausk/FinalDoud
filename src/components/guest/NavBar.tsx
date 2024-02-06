@@ -48,30 +48,37 @@ export function NavBar() {
                       <DrawerTitle className="text-red-500 text-left text-xs px-3 mb-4">Navigation</DrawerTitle>
                       <Separator className="my-4" />
                       <DrawerDescription>
+                        <DrawerClose asChild>
                         <Link href="/" 
                           className={cn("block rounded-md px-3 py-2 text-4xl font-medium text-left", pathName === '/' ? 'text-red-500' : 'text-white')}
                         >
                           Accueil
                         </Link>
+                        </DrawerClose>
+                        <DrawerClose asChild>
                         <Link href="/works"
                           className={cn("block rounded-md px-3 py-2 text-4xl font-medium text-left", pathName.startsWith('/works') ? 'text-red-500' : 'text-white')}
                         >
                           Projets
                         </Link>
+                        </DrawerClose>
+                        
+                        <DrawerClose asChild>
                         <Link href="/contact"
                           className={cn("block rounded-md px-3 py-2 text-4xl font-medium text-left", pathName === '/contact' ? 'text-red-500' : 'text-white')}
                         >
                           Me contacter
                         </Link>
+                        </DrawerClose>
                       </DrawerDescription>
                       </DrawerHeader>
                       <DrawerFooter className="m-0">
                         <Separator className="my-4" />
                         <DrawerTitle className="text-xs text-red-500">SOCIALS</DrawerTitle>
                         <div className="flex mt-2">
-                          <Link href="/" className="text-sm text-left text-white">INSTAGRAM</Link>
-                          <Link href="/works" className="text-sm text-left text-white mx-7">FACEBOOK</Link>
-                          <Link href="/contact" className="text-sm text-left text-white">TIKTOK</Link>
+                          <Link href="https://www.instagram.com" className="text-sm text-left text-white" target='blank'>INSTAGRAM</Link>
+                          <Link href="https://www.facebook.com" className="text-sm text-left text-white mx-7" target='blank'>FACEBOOK</Link>
+                          <Link href="https://www.tiktok.com" className="text-sm text-left text-white" target='blank'>TIKTOK</Link>
                         </div>
                       </DrawerFooter>
                   </DrawerContent>

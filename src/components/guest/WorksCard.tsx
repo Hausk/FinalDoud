@@ -17,7 +17,7 @@ export function WorksCard({work}:{work:any}) {
             src={work.pinnedImage}
             height={700}
             width={400}
-            className="h-auto w-1/2 md:w-[80%] rounded-xl group-hover/card:shadow-xl m-auto"
+            className="h-auto w-[80%] md:w-[80%] rounded-xl group-hover/card:shadow-xl m-auto"
             alt="thumbnail"
         />
         </CardItem>

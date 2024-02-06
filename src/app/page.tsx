@@ -1,5 +1,6 @@
 import { TextGenerateEffectDemo } from "@/components/guest/TextGenerated";
 import { MovingBorderDemo } from "@/components/guest/hpButton";
+import { SparklesPreview } from "@/components/guest/sparkle";
 import { BackgroundGradientAnimation } from "@/components/ui/background-gradient-animation";
 import { Button } from "@/components/ui/moving-border";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
@@ -20,27 +21,26 @@ export default function Home() {
             font-bold uppercase drop-shadow-xl shadow-gray-50
             w-full flex h-full flex-col md:flex-row z-50
           ">
-            <span className="top-0 absolute left-0 md:relative z-10">
+            <span className="left-0 md:relative w-100 text-left">
               Libre
             </span>
-            <span className="top-[20%] absolute right-0 md:relative z-10">
+            <span className="right-0 md:relative w-100 text-end">
               &nbsp;&amp;
             </span>
-            <span className="top-[45%] absolute left-2 flex flex-col text-left z-10">
+            <span className="left-2 flex flex-col w-100 text-left leading-[0.75]">
               Viv
             </span>
-            <span className="top-[62%] absolute right-2 -z-40">
+            <span className="w-100 text-right">
               ant
             </span>
-            <br/>
-            <span className="top-[80%] absolute left-1/2 -translate-x-1/2 text-5xl z-40">
+            <span className="text-5xl mx-auto">
               Photographie
             </span>
           </h1>
         </div>
-        <div className="w-[90%] m-auto md:w-1/3 mt-5 flex flex-col">
+        <div className="w-[90%] m-auto md:w-1/3 flex flex-col">
           <p className="w-fit md:border-white md:border md:py-2 overflow-hidden m-auto">
-            <span className="md:px-5 md:py-3 flex">Bonjour,&nbsp;je&nbsp;suis&nbsp;<span className="font-semibold">Victoria</span></span></p>
+            <span className="md:px-5 md:py-3 flex text-lg">Bonjour,&nbsp;je&nbsp;suis&nbsp;<span className="font-semibold">Victoria</span></span></p>
             <TextGenerateEffect words={paragraph} />
           <div className="flex justify-between md:justify-normal">
             <Link href="/works" className="
@@ -62,19 +62,17 @@ export default function Home() {
         </div>
       </div>
         <Image
-          className="absolute z-30 left-1/2 transform -translate-x-1/2 top-[20%] -translate-y-1/4 rounded-[40%] w-[1000px]
-            md:bottom-0 md:w-[27%] md:rounded-none"
+          className="absolute z-30 left-1/2 transform -translate-x-1/2 -translate-y-1/3 rounded-[40%] top-1/4 md:top-auto md:bottom-0 md:translate-y-0 md:rounded-none"
           src="/header.png"
           alt="Image de fond"
           width={800}
           height={1000}
         />
         <Image
-          className="absolute z-20 left-1/2 transform -translate-x-1/2 blur-md top-[20%] -translate-y-1/4 rounded-[40%]
-            md:bottom-0 md:w-[27.2%] md:rounded-none"
+          className="absolute z-20 left-1/2 transform -translate-x-1/2 -translate-y-1/3 rounded-[40%] top-1/4 blur-md md:top-auto md:bottom-0 md:translate-y-0 md:rounded-none"
           src="/header.png"
           alt="Image de fond"
-          width={800}
+          width={810}
           height={1000}
         />
     </BackgroundGradientAnimation>

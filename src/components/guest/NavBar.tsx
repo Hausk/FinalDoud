@@ -1,32 +1,83 @@
 'use client'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { FacebookIcon, Menu as Hamburger, LucideFacebook, X } from 'lucide-react'
+import { Disclosure} from '@headlessui/react'
+import { Menu as Hamburger, X } from 'lucide-react'
 import { FaFacebook, FaInstagram, FaTiktok } from "react-icons/fa";
 import Image from 'next/image'
-import { cn } from '@/lib/utils'
 import Link from 'next/link'
-import { InstagramLogoIcon, TwitterLogoIcon } from '@radix-ui/react-icons'
-import { TikTok } from '@/lib/icons'
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer"
+import { Button } from '../ui/button';
+import { Separator } from "@/components/ui/separator"
+import { usePathname } from 'next/navigation';
+import { cn } from '@/utils/cn';
+
+
+
+
 export function NavBar() {
+  const pathName = usePathname()
   return (
     <Disclosure as="nav" className="bg-transparent fixed w-dvw backdrop-blur-md z-50">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
             <div className="relative flex h-16 items-center justify-between">
-              <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
+              <div className="inset-y-0 left-0 flex items-center sm:hidden justify-around">
                 {/* Mobile menu button*/}
-                <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-                  <span className="absolute -inset-0.5" />
-                  <span className="sr-only">Open main menu</span>
-                  {open ? (
-                    <X className="block h-6 w-6" aria-hidden="true" />
-                  ) : (
-                    <Hamburger className="block h-6 w-6" aria-hidden="true" />
-                  )}
-                </Disclosure.Button>
+                <Drawer>
+                  <DrawerTrigger className="relative inline-flex items-center justify-center rounded-md p-2 text-white">
+                      <p className="block h-6 w-6" aria-hidden="true">menu</p>
+                  </DrawerTrigger>
+                  <DrawerContent className="flex flex-col justify-between">
+                    <div className="w-full h-16">
+                    <DrawerClose asChild>
+                      <div className="h-16 absolute top-5 rounded-md text-white flex right-5">
+                        <X className="block w-fit m-auto" aria-hidden="true" size={32} />
+                      </div>
+                    </DrawerClose>
+                    </div>
+                    <DrawerHeader className="">
+                      <DrawerTitle className="text-red-500 text-left text-xs px-3 mb-4">Navigation</DrawerTitle>
+                      <Separator className="my-4" />
+                      <DrawerDescription>
+                        <Link href="/" 
+                          className={cn("block rounded-md px-3 py-2 text-4xl font-medium text-left", pathName === '/' ? 'text-red-500' : 'text-white')}
+                        >
+                          Accueil
+                        </Link>
+                        <Link href="/works"
+                          className={cn("block rounded-md px-3 py-2 text-4xl font-medium text-left", pathName === '/works' ? 'text-red-500' : 'text-white')}
+                        >
+                          Projets
+                        </Link>
+                        <Link href="/contact"
+                          className={cn("block rounded-md px-3 py-2 text-4xl font-medium text-left", pathName === '/contact' ? 'text-red-500' : 'text-white')}
+                        >
+                          Me contacter
+                        </Link>
+                      </DrawerDescription>
+                      </DrawerHeader>
+                      <DrawerFooter className="m-0">
+                        <Separator className="my-4" />
+                        <DrawerTitle className="text-xs text-red-500">SOCIALS</DrawerTitle>
+                        <div className="flex mt-2">
+                          <Link href="/" className="text-sm text-left text-white">INSTAGRAM</Link>
+                          <Link href="/works" className="text-sm text-left text-white mx-7">FACEBOOK</Link>
+                          <Link href="/contact" className="text-sm text-left text-white">TIKTOK</Link>
+                        </div>
+                      </DrawerFooter>
+                  </DrawerContent>
+                  </Drawer>
               </div>
-              <div className="flex flex-1 items-center justify-end sm:items-stretch sm:justify-between">
+              <div className="flex items-center mr-2 sm:items-stretch sm:justify-between">
                 <div className="flex justify-between">
                   <Link
                     href="#"
@@ -78,4 +129,3 @@ export function NavBar() {
     </Disclosure>
     )
   }
-  

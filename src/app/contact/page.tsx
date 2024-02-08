@@ -1,7 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
-import moment from "moment";
+import moment from "moment-timezone";
+
 export default function Page() {
     return (
         <div className="w-screen flex bg-gradient-to-t from-violet-950 via-slate-950 to-red-950 bg-slate-500">
@@ -60,7 +61,7 @@ export default function Page() {
                         <div className="contact">
                             <h2 className="text-xs text-gray-500 pb-4">INFORMATIONS DE CONTACT</h2>
                             <a href="mailto:victoria@gmail.com">victoria@gmail.com</a>
-                            <p>Emplacement:&nbsp;Paris IDF</p>
+                            <p>Paris IDF</p>
                         </div>
                     </div>
                 </div>
@@ -68,9 +69,9 @@ export default function Page() {
                     <div className="social py-5">
                     <h2 className="text-xs text-gray-500">Social</h2>
                     <div className="flex mt-2">
-                        <Link href="/" className="text-sm text-left text-white">INSTAGRAM</Link>
-                        <Link href="/works" className="text-sm text-left text-white mx-7">FACEBOOK</Link>
-                        <Link href="/contact" className="text-sm text-left text-white">TIKTOK</Link>
+                        <Link href="https://www.instagram.com/libre_vivant_photographie/?igshid=YmMyMTA2M2Y%3D" className="text-sm text-left text-white" target="blank">INSTAGRAM</Link>
+                        <Link href="https://m.facebook.com/profile.php?id=100072519471892" className="text-sm text-left text-white mx-7" target="blank">FACEBOOK</Link>
+                        <Link href="https://www.tiktok.com/@libre_vivant" className="text-sm text-left text-white" target="blank">TIKTOK</Link>
                     </div>
                     </div>
                     <Separator className="my-5" />
@@ -81,9 +82,8 @@ export default function Page() {
                         </div>
                         <div>
                         <h2 className="text-xs text-gray-500 font-bold">Heure actuelle</h2>
-                            <p className="text-base font-semibold text-white">{moment().format('HH:MM')}</p>
+                            <p className="text-base font-semibold text-white">{moment().tz('Europe/Paris').format('HH:mm')}</p>
                         </div>
-
                     </div>
                 </div>
             </div>

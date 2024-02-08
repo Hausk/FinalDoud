@@ -21,7 +21,7 @@ export function PhotoBox({images}: {images: any}) {
     <PhotoAlbum photos={images} layout="columns"
       renderPhoto={NextJsImage}
       columns={(containerWidth) => {
-        if (containerWidth < 500) return 2;
+        if (containerWidth < 1024) return 2;
         return 3;
       }} onClick={({ index }) => setIndex(index)} />
 

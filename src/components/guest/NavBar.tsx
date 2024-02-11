@@ -26,7 +26,7 @@ export function NavBar() {
   const pathName = usePathname()
   return (
         <nav className="w-screen fixed top-0 left-0 z-50 backdrop-blur-xl">
-        <div className="mx-auto max-w-7xl md:w-full md:max-w-full px-2 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl lg:w-[80%] md:max-w-full px-2 sm:px-6 lg:px-8">
           <div className="relative flex h-16 items-center justify-between md:justify-normal">
             <div className="inset-y-0 left-0 flex items-center sm:hidden justify-around">
               {/* Mobile menu button*/}

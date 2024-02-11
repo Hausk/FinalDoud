@@ -1,3 +1,4 @@
+import { NavBar } from "@/components/guest/NavBar";
 import { BackgroundGradientAnimation } from "@/components/ui/background-gradient-animation";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 import { ArrowDown, ArrowRight } from "lucide-react";
@@ -8,6 +9,8 @@ const paragraph = 'Photographe passionnée par la création de souvenirs heureux
 
 export default function Home() {
   return (
+    <>
+    <NavBar />
     <BackgroundGradientAnimation className="flex">
       <div className="m-auto w-full lg:w-[80%] flex flex-col lg:block justify-between h-full lg:h-auto">
         <div className="w-full h-1/2 lg:h-auto flex m-auto flex-col mt-16 lg:mt-0">
@@ -93,5 +96,6 @@ export default function Home() {
           height={1000}
         />
     </BackgroundGradientAnimation>
+    </>
   )
 }

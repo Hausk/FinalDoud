@@ -38,7 +38,7 @@ export function AlbumArtwork({
     <div className={cn("space-y-3", className)} {...props}>
       <div className="overflow-hidden rounded-md relative">
         <Image
-          src={work.pinnedImage}
+          src={work.pinnedImage ?? ''}
           alt={work.title}
           width={width}
           height={height}

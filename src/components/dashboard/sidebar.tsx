@@ -2,24 +2,25 @@
 import { cn } from "@/lib/utils"
 import { Button } from "../ui/button"
 import { ScrollArea } from "../ui/scroll-area"
-
+import { signOut } from 'next-auth/react';
 import { Playlist } from "@/lib/playlists"
 import Link from "next/link"
 import { usePathname } from 'next/navigation'
 import { worksList } from "@/lib/works"
 import { Separator } from "../ui/separator"
-import { ModeToggle } from "./darkmode"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu"
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
 import { useTheme } from "next-themes"
-import { MoonIcon, Sun } from "lucide-react"
+import { DashboardProfile } from "./dashboardProfile"
+import { Session } from "next-auth"
 
 
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {
   playlists: Playlist[]
+  session: Session | null;
 }
 
-export function Sidebar({ className, playlists }: SidebarProps) {
+export function Sidebar({ className, playlists, session }: SidebarProps) {
   const { theme, setTheme } = useTheme()
   const toggleTheme = () => {
     if (theme === "light") {
@@ -34,12 +35,11 @@ export function Sidebar({ className, playlists }: SidebarProps) {
       <div className="space-y-4 py-4">
         <div className="px-3 py-2">
             <DropdownMenu>
-              <DropdownMenuTrigger className="flex w-full">
+              <DropdownMenuTrigger className="flex w-full px-4">
                 <Avatar>
-                  <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-                  <AvatarFallback>JB</AvatarFallback>
+                    <AvatarImage src={session?.user.image ?? ''} alt="Image de profil" />
                 </Avatar>
-                <p className="my-auto pl-5">Jonathan Bessa</p>
+                <p className="my-auto pl-5">{session?.user.name ?? ''}</p>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
                   <DropdownMenuItem onClick={toggleTheme} className="cursor-pointer">
@@ -50,7 +50,10 @@ export function Sidebar({ className, playlists }: SidebarProps) {
                     )}
                   </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem className="text-red-500 cursor-pointer">Se déconnecter</DropdownMenuItem>
+                <DropdownMenuItem className="text-red-500 cursor-pointer"
+                  onClick={(async () => {
+                    await signOut({callbackUrl: '/login'})})}
+                >Se déconnecter</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           <Separator className="my-5"/>
@@ -76,7 +79,7 @@ export function Sidebar({ className, playlists }: SidebarProps) {
                     Statistiques
                 </Link>
             </Button>
-            <Button variant={pathName.startsWith('/dashboard/works') ? 'secondary' : 'ghost'} className="w-full justify-start" asChild>
+            <Button variant={pathName?.startsWith('/dashboard/works') ? 'secondary' : 'ghost'} className="w-full justify-start" asChild>
                 <Link href="/dashboard/works">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -96,7 +99,7 @@ export function Sidebar({ className, playlists }: SidebarProps) {
                     Catégories
                 </Link>
             </Button>
-            <Button variant={pathName.startsWith('/dashboard/text-edit') ? 'secondary' : 'ghost'} className="w-full justify-start" asChild>
+            <Button variant={pathName?.startsWith('/dashboard/text-edit') ? 'secondary' : 'ghost'} className="w-full justify-start" asChild>
                 <Link href="/dashboard/text-edit">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -118,7 +121,7 @@ export function Sidebar({ className, playlists }: SidebarProps) {
             </Button>
           </div>
           <div className="space-y-1">
-            <Button variant={pathName.startsWith('/dashboard/users') ? 'secondary' : 'ghost'} className="w-full justify-start" asChild>
+            <Button variant={pathName?.startsWith('/dashboard/users') ? 'secondary' : 'ghost'} className="w-full justify-start" asChild>
                 <Link href="/dashboard/users">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"

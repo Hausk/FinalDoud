@@ -4,8 +4,9 @@ import Image from "next/image";
 import React from "react";
 import { CardContainer, CardItem } from "../ui/3d-card";
 import Link from "next/link";
+import { Work } from "@prisma/client";
  
-export function WorksCard({work}:{work:any}) {
+export function WorksCard({work}:{work: Work}) {
   return (
     <CardContainer className="inter-var relative">
         <Link 
@@ -15,8 +16,8 @@ export function WorksCard({work}:{work:any}) {
         <CardItem translateZ="100" className="flex overflow-hidden md:w-fit h-auto max-h-1/2 mt-4 relative">
           <Image
             src={work.pinnedImage}
-            height={700}
-            width={400}
+            height={1000}
+            width={1000}
             className="h-auto w-[80%] md:w-[80%] rounded-xl group-hover/card:shadow-xl m-auto"
             alt="thumbnail"
         />

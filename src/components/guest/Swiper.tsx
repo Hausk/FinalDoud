@@ -5,16 +5,15 @@ import { Parallax } from 'swiper/modules';
 import '@/css/style.css'
 import { useMotionValue, useTransform } from 'framer-motion';
 import { WorksCard } from './WorksCard';
+import { Work } from '@prisma/client';
 
-
-
-export function Caroussel({works}:{works:any}) {
+export function Caroussel({works}:{works: Work}) {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const rotateX = useTransform(y, [-100, 100], [30, -30]);
   const rotateY = useTransform(x, [-100, 100], [30, -30]);
     return (
-        <Swiper
+      <Swiper
         centeredSlides={true}
         loop={true}
         speed={600}
@@ -41,7 +40,7 @@ export function Caroussel({works}:{works:any}) {
         onSwiper={(swiper) => console.log(swiper)}
         className="h-full"
       >
-        {works.map((work: any) => (
+        {Object.values(works).map((work: any) => (
             <SwiperSlide key={work.id} className="flex relative">
               <WorksCard work={work}/>
             </SwiperSlide>

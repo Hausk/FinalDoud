@@ -1,4 +1,4 @@
-import { fetchWork } from "@/actions/fetchWork";
+import { fetchWorkBySlug } from "@/actions/fetchWork";
 import { Button } from "@/components/ui/button";
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuTrigger } from "@/components/ui/context-menu";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
@@ -9,7 +9,7 @@ import Image from "next/image";
 import { notFound } from 'next/navigation'
 
 export default async function Page({ params }: {params: {slug: string}}) {
-    const data = await fetchWork(params.slug)
+    const data = await fetchWorkBySlug(params.slug)
     if (!data) {
         notFound()
     }

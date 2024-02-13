@@ -24,9 +24,9 @@ model Work {
 
 model Image {
   id        Int       @id @default(autoincrement())
+  fileName  String    @unique
   createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  src       String
+  src       String    @unique
   work      Work      @relation(fields: [workId], references: [id])
   workId    Int
   width     Int

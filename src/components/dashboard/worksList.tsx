@@ -48,8 +48,8 @@ export default async function WorksList() {
                         className="col-span-3"
                       />
                     </div>
-                    <div className="flex w-full">
-                      <Dropzone/>
+                    <div className="w-full">
+                      <Dropzone />
                     </div>
                   </div>
                   <DialogFooter>

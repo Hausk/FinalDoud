@@ -20,42 +20,7 @@ export default async function WorksList() {
                 <DialogTrigger asChild>
                   <Button variant="outline">Ajouter une catégorie</Button>
                 </DialogTrigger>
-                <DialogContent className="sm:max-w-[425px]">
-                  <DialogHeader>
-                    <DialogTitle>Créer une catégorie</DialogTitle>
-                    <DialogDescription>
-                      Créer une catégorie en lui donnant un nom, tu pourras la modifier ultérieurement
-                    </DialogDescription>
-                  </DialogHeader>
-                  <div className="grid gap-4 py-4">
-                    <div className="grid grid-cols-4 items-center gap-4">
-                      <Label htmlFor="title" className="text-right">
-                        Titre
-                      </Label>
-                      <Input
-                        id="title"
-                        defaultValue="Titre de la catégorie"
-                        className="col-span-3"
-                      />
-                    </div>
-                    <div className="grid grid-cols-4 items-center gap-4">
-                      <Label htmlFor="username" className="text-right">
-                        Username
-                      </Label>
-                      <Input
-                        id="username"
-                        defaultValue="@peduarte"
-                        className="col-span-3"
-                      />
-                    </div>
-                    <div className="w-full">
-                      <Dropzone />
-                    </div>
-                  </div>
-                  <DialogFooter>
-                    <Button type="submit">Sauvegarder</Button>
-                  </DialogFooter>
-                </DialogContent>
+                <Dropzone />
               </Dialog>
             </div>
           </div>

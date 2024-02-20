@@ -7,6 +7,7 @@ import { Sidebar } from '@/components/dashboard/sidebar'
 import { playlists } from '@/lib/playlists'
 import { getAuthSession } from '@/lib/auth'
 import { redirect } from 'next/navigation'
+import { Toaster } from '@/components/ui/toaster'
  
 export const fontSans = FontSans({
   subsets: ["latin"],
@@ -51,6 +52,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
                 </div>
               </div>
             </div>
+            <Toaster />
         </ThemeProvider>
       </body>
     </html>

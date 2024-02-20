@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils';
 import { useEffect, useState } from 'react';
 import DropzoneComponent, { useDropzone } from 'react-dropzone'
 import { now } from 'moment';
-import { uploadFile } from '@/actions/uploadImage';
+import { uploadFile, uploadWork } from '@/actions/uploadImage';
 import { Image as Img } from '@prisma/client';
 import { motion } from 'framer-motion'
 import { XIcon } from 'lucide-react';
@@ -12,15 +12,16 @@ import { Button } from '../ui/button';
 import { DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '../ui/dialog';
 import { Label } from '../ui/label';
 import { Input } from '../ui/input';
-import { getImageSize } from 'next/dist/server/image-optimizer'; 
+import { useToast } from "@/components/ui/use-toast"
 
 export default function Dropzone() {
+    const { toast } = useToast()
     const [loading, setLoading] = useState(false)
     const [files, setFiles] = useState<Array<File & { preview: string }>>([]);
     const [preview, setPreview] = useState([]) as any;
     const [filing, setFiling] = useState([]) as any;
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const maxSize = 20971520;
-
     const { getRootProps, getInputProps } = useDropzone({
         onDrop: async (acceptedFiles) => {
             setFiles(
@@ -45,7 +46,23 @@ export default function Dropzone() {
             reader.onerror = () => console.log("Erreur de lecture du fichié");
             reader.onload = async () => {
                 //await uploadPost(file);
-                setPreview((prevPreview: any) => [...prevPreview, ...[file]]);
+                const imgInfos = await getImageDimensions(file);
+                if (!preview.some((previewFile: any) => previewFile.name === file.name)) {
+                    // Ajouter le fichier à la prévisualisation uniquement s'il n'existe pas déjà
+                    setPreview((prevPreview: any) => [
+                        ...prevPreview,
+                        {
+                            file: file,
+                            preview: URL.createObjectURL(file),
+                            width: imgInfos.width,
+                            height: imgInfos.height
+                        }
+                    ]);
+                } else {
+                    toast({
+                        description: 'Une image avec le même nom à déjà été importé',
+                    });
+                }
             }
             reader.readAsArrayBuffer(file);
         });
@@ -54,35 +71,37 @@ export default function Dropzone() {
         await uploadPost(preview);
     }
 
-    const uploadPost = async (selectedFile: File) => {
-        if(loading) return;
+    const uploadPost = async (selectedFile: any) => {
+        const titleInput = document.getElementById('title') as HTMLInputElement;
+        const title = titleInput.value;
         const timeStamp = now()
-        const { name, width, height } = await getImageDimensions(selectedFile);
-        const imageName = `${timeStamp}-${name}`;
-        const imagePath = `/images/${timeStamp}-${name}`;
-
-        // Collection de l'image
-        const data = {
-            fileName: imageName,
-            src: imagePath,
-            workId: 1,
-            width: width,
-            height: height
-        }
+        if(loading) return;
+        const data = selectedFile.map((file: any) => {
+            const imageName = `${timeStamp}-${file.file.name}`;
+            const imagePath = `/images/${timeStamp}-${file.file.name}`;
+            return {
+                fileName: imageName,
+                src: imagePath,
+                width: file.width,
+                height: file.height
+            }
+        })
         try {
-            const form = new FormData();
+            /*const form = new FormData();
             form.append('file', selectedFile);
             form.append('imagePath', imagePath);
+            form.append('title', title);
             const res = await fetch('/dashboard/api/upload', {
                 method: 'POST',
                 body: form,
-            })
-            if(!res.ok) throw new Error(await res.text())
+            })*/
+            await uploadWork(data, title)
+            //if(!res.ok) throw new Error(await res.text())
         } catch (e: any) {
             console.error(e)
         }
         // Server action prisma pour creer
-        const docRef = await uploadFile(data as Img)
+        //const docRef = await uploadFile(data as Img)
         setLoading(true);
     }
 
@@ -141,11 +160,11 @@ export default function Dropzone() {
                                                 type: "spring",
                                                 stiffness: 260,
                                                 damping: 20,
-                                                delay: index / 10
+                                                delay: index / 20
                                             }}
                                         >
                                             <img
-                                                src={URL.createObjectURL(file)}
+                                                src={file.preview}
                                                 alt={file.name}
                                                 className='w-full m-auto rounded-sm'
                                                 width={100}
@@ -170,11 +189,23 @@ export default function Dropzone() {
 
 const getImageDimensions = async (file: File): Promise<{ name: string, width: number, height: number }> => {
     return new Promise((resolve, reject) => {
-        const img = new Image();
-        img.onload = () => {
-            resolve({ name: file.name, width: img.width, height: img.height });
+        const reader = new FileReader();
+        
+        reader.onload = (event) => {
+            const img = new Image();
+            img.onload = () => {
+                resolve({ name: file.name, width: img.width, height: img.height });
+            };
+            img.onerror = () => {
+                reject(new Error("Impossible de charger l'image"));
+            };
+            img.src = event.target.result as string;
         };
-        img.onerror = reject;
-        img.src = URL.createObjectURL(file);
+
+        reader.onerror = () => {
+            reject(new Error("Impossible de lire le fichier"));
+        };
+
+        reader.readAsDataURL(file);
     });
 };

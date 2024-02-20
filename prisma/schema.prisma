@@ -13,7 +13,6 @@ datasource db {
 model Work {
   id          Int       @id @default(autoincrement())
   title       String
-  year        String
   slug        String
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt 

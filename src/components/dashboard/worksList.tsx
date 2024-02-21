@@ -10,15 +10,15 @@ import Dropzone from "./dropzone";
 
 export default async function WorksList() {
     const works = await fetchWorksList()
-    if(works) {
-        return (
+    if(works.length === 0) {
+      return (
         <div className="w-full h-full">
           <div className="flex items-center justify-between space-y-2">
             <h2 className="text-3xl font-bold tracking-tight">Gestion des Catégorie</h2>
             <div className="flex items-center space-x-2">
               <Dialog>
                 <DialogTrigger asChild>
-                  <Button variant="outline">Ajouter une catégorie</Button>
+                  <Button>Ajouter une catégorie</Button>
                 </DialogTrigger>
                 <Dropzone />
               </Dialog>
@@ -35,7 +35,12 @@ export default async function WorksList() {
           <div className="flex items-center justify-between space-y-2">
             <h2 className="text-3xl font-bold tracking-tight">Gestion des Catégorie</h2>
             <div className="flex items-center space-x-2">
-              <Button>Ajouter une catégorie</Button>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button>Ajouter une catégorie</Button>
+                </DialogTrigger>
+                <Dropzone />
+              </Dialog>
             </div>
           </div>
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">

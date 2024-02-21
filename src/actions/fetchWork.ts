@@ -1,3 +1,4 @@
+'use server'
 import prisma from '@/lib/prisma'
 import { Work } from '@prisma/client';
 
@@ -16,4 +17,24 @@ export async function fetchWorkBySlug(slug:string) {
         },
     })
     return workBySlug
+}
+
+export async function fetchWorkId(slug:string) {
+    const work = await prisma.work.findFirst({
+        where: {
+            slug: slug,
+        }
+    })
+    return work
+}
+
+export async function pinWorkImage(id: number, imagePath: string) {
+    console.log(imagePath);
+    const work = await prisma.work.update({
+        where: { id: id },
+        data: {
+            pinnedImage: imagePath
+        }
+    })
+    return work
 }

@@ -1,6 +1,10 @@
 'use server'
 import prisma from '@/lib/prisma'
 import { Image } from '@prisma/client';
+import fs, { existsSync, mkdir, mkdirSync } from 'fs';
+import { writeFile } from "fs/promises";
+import path, { join } from 'path';
+import slugify from 'slugify';
 
 export async function uploadFile(data: Image) {
     await prisma.image.create({
@@ -16,7 +20,7 @@ export async function uploadFile(data: Image) {
 }
 
 export async function uploadWork(images: any, workTitle: string) {
-    const slug = workTitle.toLowerCase().replace(/\s+/g, '-');
+    const slug = slugify(workTitle);
     const work = await prisma.work.create({
         data: {
             title: workTitle,
@@ -29,6 +33,20 @@ export async function uploadWork(images: any, workTitle: string) {
         await prisma.image.create({
             data: {
                 workId: work.id,
+                fileName: image.fileName,
+                src: image.src,
+                width: image.width,
+                height: image.height
+            }
+        });
+    });
+}
+
+export async function uploadImagesWork(images: any, workId: any) {
+    images.forEach(async (image: any) => {
+        await prisma.image.create({
+            data: {
+                workId: workId,
                 fileName: image.fileName,
                 src: image.src,
                 width: image.width,

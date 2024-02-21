@@ -7,8 +7,6 @@ export async function POST(request: NextRequest) {
     const data = await request.formData();
     const file: File | null = data.get('file') as unknown as File;
     const imagePath: string = data.get('imagePath') as string; // Récupérer le chemin de l'image
-    console.log(imagePath);
-
     if (!file) {
         return NextResponse.json({ success: false });
     }

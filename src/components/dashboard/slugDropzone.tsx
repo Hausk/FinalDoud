@@ -3,7 +3,8 @@ import { cn } from '@/lib/utils';
 import { useEffect, useState } from 'react';
 import DropzoneComponent, { useDropzone } from 'react-dropzone'
 import { now } from 'moment';
-import { uploadFile, uploadWork } from '@/actions/uploadImage';
+import { uploadImagesWork } from '@/actions/uploadImage';
+import { fetchWorkBySlug, fetchWorkId } from '@/actions/fetchWork';
 import { Image as Img } from '@prisma/client';
 import { motion } from 'framer-motion'
 import { XIcon } from 'lucide-react';
@@ -14,7 +15,7 @@ import { Label } from '../ui/label';
 import { Input } from '../ui/input';
 import { useToast } from "@/components/ui/use-toast"
 
-export default function Dropzone() {
+export default function SlugDropzone({ workId }: {workId: number}) {
     const { toast } = useToast()
     const [loading, setLoading] = useState(false)
     const [files, setFiles] = useState<Array<File & { preview: string }>>([]);
@@ -72,8 +73,6 @@ export default function Dropzone() {
     }
 
     const uploadPost = async (selectedFile: any) => {
-        const titleInput = document.getElementById('title') as HTMLInputElement;
-        const title = titleInput.value;
         const timeStamp = now()
         if(loading) return;
         const data = await Promise.all(selectedFile.map(async (file: any) => {
@@ -95,7 +94,7 @@ export default function Dropzone() {
             }
         }))
         try {
-            const create = await uploadWork(data, title)
+            const create = await uploadImagesWork(data, workId)
         } catch (e: any) {
             console.error(e)
         }
@@ -110,18 +109,6 @@ export default function Dropzone() {
                     Créer une catégorie en lui donnant un nom, tu pourras la modifier ultérieurement
                 </DialogDescription>
             </DialogHeader>
-            <div className="grid gap-4 py-4">
-                <div className="grid grid-cols-4 items-center gap-4">
-                    <Label htmlFor="title" className="text-right">
-                        Titre
-                    </Label>
-                    <Input
-                        id="title"
-                        defaultValue="Titre de la catégorie"
-                        className="col-span-3"
-                    />
-                </div>
-            </div>
                 <DropzoneComponent minSize={0} maxSize={maxSize} onDrop={onDrop}>
                 {({getRootProps, getInputProps, isDragAccept, isDragActive, isDragReject, fileRejections,}) => {
                     const isFileTooLarge = fileRejections.length > 0 && fileRejections[0].file.size > maxSize;

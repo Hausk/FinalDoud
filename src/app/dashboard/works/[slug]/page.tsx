@@ -1,4 +1,6 @@
 import { fetchWorkBySlug } from "@/actions/fetchWork";
+import ImageAction from "@/components/dashboard/imageAction";
+import SlugDropzone from "@/components/dashboard/slugDropzone";
 import { Button } from "@/components/ui/button";
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuTrigger } from "@/components/ui/context-menu";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
@@ -22,39 +24,7 @@ export default async function Page({ params }: {params: {slug: string}}) {
                     <DialogTrigger asChild>
                         <Button><PlusIcon className="mr-2"/> Ajouter</Button>
                     </DialogTrigger>
-                    <DialogContent className="sm:max-w-[425px]">
-                        <DialogHeader>
-                            <DialogTitle>Ajouter de nouvelles photos</DialogTitle>
-                            <DialogDescription>
-                                Ajoutes les photos que tu veux au format PNG JPG JPEG.
-                            </DialogDescription>
-                        </DialogHeader>
-                        <div className="grid gap-4 py-4">
-                            <div className="grid grid-cols-4 items-center gap-4">
-                            <Label htmlFor="name" className="text-right">
-                                Name
-                            </Label>
-                            <Input
-                                id="name"
-                                defaultValue="Pedro Duarte"
-                                className="col-span-3"
-                            />
-                            </div>
-                            <div className="grid grid-cols-4 items-center gap-4">
-                            <Label htmlFor="username" className="text-right">
-                                Username
-                            </Label>
-                            <Input
-                                id="username"
-                                defaultValue="@peduarte"
-                                className="col-span-3"
-                            />
-                            </div>
-                        </div>
-                        <DialogFooter>
-                            <Button type="submit">Save changes</Button>
-                        </DialogFooter>
-                    </DialogContent>
+                    <SlugDropzone workId={data.id} />
                 </Dialog>
                 </div>
             </div>
@@ -64,18 +34,15 @@ export default async function Page({ params }: {params: {slug: string}}) {
                     <ContextMenuTrigger>
                     <div className="overflow-hidden rounded-md w-full">
                         <Image
-                            src={image.path}
+                            src={image.src}
                             alt={image.id}
-                            width={500}
-                            height={500}
+                            width={image.width}
+                            height={image.height}
                             className="w-full object-cover"
                         />
                         </div>
                     </ContextMenuTrigger>
-                    <ContextMenuContent>
-                      <ContextMenuItem>Épingler</ContextMenuItem>
-                      <ContextMenuItem>Supprimer</ContextMenuItem>
-                    </ContextMenuContent>
+                    <ImageAction id={data.id} imagePath={image.src}/>
                   </ContextMenu>
                 ))}
             </div>

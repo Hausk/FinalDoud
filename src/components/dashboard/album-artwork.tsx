@@ -50,7 +50,6 @@ export function AlbumArtwork({
       </div>
       <div className="space-y-1 text-sm">
         <h3 className="font-medium leading-none">{work.title}</h3>
-        <p className="text-xs text-muted-foreground">{work.year}</p>
       </div>
     </div>
   )

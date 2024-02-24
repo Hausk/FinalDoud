@@ -20,7 +20,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <html lang="en">
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased",
+          "min-h-screen bg-background font-sans antialiased overflow-x-hidden",
           fontSans.variable
         )}
       >

@@ -7,7 +7,7 @@ import { useMotionValue, useTransform } from 'framer-motion';
 import { WorksCard } from './WorksCard';
 import { Work } from '@prisma/client';
 
-export function Caroussel({works}:{works: Work}) {
+export function Caroussel({works}:{works: any}) {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const rotateX = useTransform(y, [-100, 100], [30, -30]);

@@ -8,8 +8,8 @@ import { playlists } from '@/lib/playlists'
 import { getAuthSession } from '@/lib/auth'
 import { redirect } from 'next/navigation'
 import { Toaster } from '@/components/ui/toaster'
- 
-export const fontSans = FontSans({
+
+const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
 })
@@ -25,36 +25,22 @@ export default async function Layout({ children }: { children: React.ReactNode }
     redirect('/login')
   }
   return (
-    <html lang="en">
-      <body
-        className={cn(
-          "min-h-screen bg-background font-sans antialiased",
-          fontSans.variable
-        )}
-      >
-        <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <div className="m-h-dvh">
-              <div className="border-t h-full">
-                <div className="bg-background h-full">
-                  <div className="grid lg:grid-cols-5 h-full">
-                    <Sidebar playlists={playlists} session={session} className="hidden lg:flex" />
-                    <div className="col-span-3 lg:col-span-4 lg:border-l min-h-full">
-                      <div className="flex-1 space-y-4 p-8 pt-6 h-full">
-                        {children}
-                      </div>
-                    </div>
-                  </div>
+    <>
+      <div className="m-h-dvh">
+        <div className="border-t h-full">
+          <div className="bg-background h-full">
+            <div className="grid lg:grid-cols-5 h-full">
+              <Sidebar playlists={playlists} session={session} className="hidden lg:flex" />
+              <div className="col-span-3 lg:col-span-4 lg:border-l min-h-full">
+                <div className="flex-1 space-y-4 p-8 pt-6 h-full">
+                  {children}
                 </div>
               </div>
             </div>
-            <Toaster />
-        </ThemeProvider>
-      </body>
-    </html>
+          </div>
+        </div>
+      </div>
+      <Toaster />
+      </>
   )
 }

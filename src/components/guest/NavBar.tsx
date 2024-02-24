@@ -23,7 +23,7 @@ import { cn } from '@/utils/cn';
 
 
 export function NavBar() {
-  const pathName = usePathname()
+  const pathName = usePathname() ?? '/';
   return (
         <nav className="w-screen fixed top-0 left-0 z-50 backdrop-blur-xl">
         <div className="mx-auto max-w-7xl lg:w-[80%] md:max-w-full px-2 sm:px-6 lg:px-8">

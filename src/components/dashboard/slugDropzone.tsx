@@ -1,18 +1,14 @@
 'use client'
 import { cn } from '@/lib/utils';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import DropzoneComponent, { useDropzone } from 'react-dropzone'
 import { now } from 'moment';
 import { uploadImagesWork } from '@/actions/uploadImage';
-import { fetchWorkBySlug, fetchWorkId } from '@/actions/fetchWork';
-import { Image as Img } from '@prisma/client';
 import { motion } from 'framer-motion'
 import { XIcon } from 'lucide-react';
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Button } from '../ui/button';
 import { DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '../ui/dialog';
-import { Label } from '../ui/label';
-import { Input } from '../ui/input';
 import { useToast } from "@/components/ui/use-toast"
 
 export default function SlugDropzone({ workId }: {workId: number}) {
@@ -20,8 +16,6 @@ export default function SlugDropzone({ workId }: {workId: number}) {
     const [loading, setLoading] = useState(false)
     const [files, setFiles] = useState<Array<File & { preview: string }>>([]);
     const [preview, setPreview] = useState([]) as any;
-    const [filing, setFiling] = useState([]) as any;
-    const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const maxSize = 20971520;
     const { getRootProps, getInputProps } = useDropzone({
         onDrop: async (acceptedFiles) => {

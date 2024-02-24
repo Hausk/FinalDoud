@@ -29,7 +29,7 @@ export function Sidebar({ className, playlists, session }: SidebarProps) {
       setTheme("light")
     }
   }
-    const pathName = usePathname()
+    const pathName = usePathname() ?? '/'
   return (
     <div className={cn("pb-12", className)}>
       <div className="space-y-4 py-4">

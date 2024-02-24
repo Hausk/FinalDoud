@@ -196,6 +196,9 @@ const getImageDimensions = async (file: File): Promise<{ name: string, width: nu
             img.onerror = () => {
                 reject(new Error("Impossible de charger l'image"));
             };
+            if (!event.target) {
+                return null;
+            }
             img.src = event.target.result as string;
         };
 

@@ -27,7 +27,7 @@ export const authConfig = {
             return session;
         },
         signIn ({ user }) {
-            if(user.email === 'dbessa.jonathan@gmail.com') {
+            if(user.email === 'dbessa.jonathan@gmail.com' || user.email === 'victoriadossantos92190@gmail.com') {
                 return true;
             }
             return false;

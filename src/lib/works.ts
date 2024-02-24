@@ -10,7 +10,6 @@ export interface Image {
 export interface Work {
     id: number
     title: string
-    year: string
     pinnedImage: string
     slug: string
     images: Image[]
@@ -19,7 +18,6 @@ export const worksList: Work[] = [
     {
         id: 1,
         title: 'France',
-        year: '2023',
         pinnedImage: "https://images.unsplash.com/photo-1611348586804-61bf6c080437?w=300&dpr=2&q=80",
         slug: 'france-2023',
         images: [
@@ -64,7 +62,6 @@ export const worksList: Work[] = [
     {
         id: 2,
         title: 'Portugal',
-        year: '2023',
         pinnedImage: "https://images.unsplash.com/photo-1611348586804-61bf6c080437?w=300&dpr=2&q=80",
         slug: 'portugal-2023',
         images: [
@@ -154,7 +151,6 @@ export const worksList: Work[] = [
     {
         id: 4,
         title: 'Espagne',
-        year: '2023',
         pinnedImage: "https://images.unsplash.com/photo-1611348586804-61bf6c080437?w=300&dpr=2&q=80",
         slug: 'espagne-2023',
         images: [
@@ -199,7 +195,6 @@ export const worksList: Work[] = [
     {
         id: 5,
         title: 'Italie',
-        year: '2023',
         pinnedImage: "https://images.unsplash.com/photo-1611348586804-61bf6c080437?w=300&dpr=2&q=80",
         slug: 'italie-2023',
         images: [
@@ -244,7 +239,6 @@ export const worksList: Work[] = [
     {
         id: 6,
         title: 'Royaumes-unis',
-        year: '2023',
         pinnedImage: "https://images.unsplash.com/photo-1611348586804-61bf6c080437?w=300&dpr=2&q=80",
         slug: 'royaumes-unis-2023',
         images: [
@@ -334,7 +328,6 @@ export const worksList: Work[] = [
     {
         id: 8,
         title: 'Allemagne',
-        year: '2023',
         pinnedImage: "https://images.unsplash.com/photo-1611348586804-61bf6c080437?w=300&dpr=2&q=80",
         slug: 'allemagne-2023',
         images: [

@@ -1,17 +1,14 @@
 'use client'
 import { cn } from "@/lib/utils"
 import { Button } from "../ui/button"
-import { ScrollArea } from "../ui/scroll-area"
 import { signOut } from 'next-auth/react';
 import { Playlist } from "@/lib/playlists"
 import Link from "next/link"
 import { usePathname } from 'next/navigation'
-import { worksList } from "@/lib/works"
 import { Separator } from "../ui/separator"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu"
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
+import { Avatar, AvatarImage } from "../ui/avatar"
 import { useTheme } from "next-themes"
-import { DashboardProfile } from "./dashboardProfile"
 import { Session } from "next-auth"
 
 

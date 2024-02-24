@@ -2,11 +2,13 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import moment from "moment-timezone";
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import Image from "next/image";
+import { NavBar } from "@/components/guest/NavBar";
 
 export default function Page() {
     return (
+        <>
+        <NavBar />
         <div className="w-full overflow-hidden flex bg-gradient-to-t from-violet-950 via-slate-950 to-red-950 bg-slate-500">
             <div className="mt-20 p-5 w-full mx-auto lg:mt-30">
                 <h1 className="text-3xl lg:text-6xl mb-10 lg:w-[70%] mx-auto">Commençons votre projet photo ensemble&nbsp;!</h1>
@@ -100,5 +102,6 @@ export default function Page() {
                 </div>
             </div>
         </div>
+        </>
     )
 }

@@ -1,23 +1,9 @@
 'use client'
 
 import Image from "next/image"
-import { PlusCircledIcon } from "@radix-ui/react-icons"
 
 import { cn } from "@/lib/utils"
-import {
-  ContextMenu,
-  ContextMenuContent,
-  ContextMenuItem,
-  ContextMenuSeparator,
-  ContextMenuSub,
-  ContextMenuSubContent,
-  ContextMenuSubTrigger,
-  ContextMenuTrigger,
-} from "../ui/context-menu"
-
-import { Album } from "@/lib/albums"
-import { playlists } from "@/lib/playlists"
-import { Work } from "@/lib/works"
+import { Work } from "@prisma/client"
 
 interface AlbumArtworkProps extends React.HTMLAttributes<HTMLDivElement> {
   work: Work

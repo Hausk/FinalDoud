@@ -10,27 +10,22 @@ export function WorksCard({work}:{work: Work}) {
   return (
     <CardContainer className="inter-var relative">
         <Link 
-            className="w-full h-full relative"
+            className="w-full h-[50%] relative"
             href={'/works/' + work.slug}
         >
-        <CardItem translateZ="100" className="flex overflow-hidden md:w-fit h-auto max-h-1/2 mt-4 relative">
+        <CardItem translateZ="100" className="flex overflow-hidden md:w-fit h-fit max-h-[75vh] max-w-[75vh] rounded-md mt-4 relative">
           <Image
             src={work.pinnedImage}
             height={1000}
             width={1000}
-            className="h-auto w-[80%] md:w-[80%] rounded-xl group-hover/card:shadow-xl m-auto"
+            className="h-auto w-full object-cover aspect-square rounded-xl group-hover/card:shadow-xl m-auto"
             alt="thumbnail"
         />
         </CardItem>
         <CardItem
             translateZ={20}
-            className="w-fit text-4xl font-semibold absolute top-0 left-5" as="p">
+            className="w-fit text-4xl font-semibold m-auto pt-2" as="p">
             {work.title}
-        </CardItem>
-        <CardItem 
-            translateZ={20}
-            className="w-fit text-4xl font-semibold absolute bottom-0 right-5" as="p">
-            {work.year}
         </CardItem>
         </Link>
     </CardContainer>

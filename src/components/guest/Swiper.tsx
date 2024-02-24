@@ -26,12 +26,12 @@ export function Caroussel({works}:{works: Work}) {
               direction: 'vertical',
             },
             580: {
-              slidesPerView: 2,
+              slidesPerView: 1,
               spaceBetween: 40,
               direction: 'horizontal',
             },
             1024: {
-              slidesPerView: 2,
+              slidesPerView: 1,
               spaceBetween: 100,
               direction: 'horizontal',
             },

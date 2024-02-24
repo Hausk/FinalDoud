@@ -29,7 +29,6 @@ export async function fetchWorkId(slug:string) {
 }
 
 export async function pinWorkImage(id: number, imagePath: string) {
-    console.log(imagePath);
     const work = await prisma.work.update({
         where: { id: id },
         data: {

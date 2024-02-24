@@ -15,7 +15,7 @@ export default async function Page({ params }: {params: {slug: string}}) {
             <div className="w-dvw min-h-dvh flex bg-gradient-to-tr from-slate-900 via-black to-violet-950">
                 <div className="w-[90%] my-20 m-auto break-all">
                     <div className="mb-10 text-4xl font-semibold w-full flex">
-                        <h2 className="w-fit uppercasebreak-all text-balance">{data.title}&nbsp;-&nbsp;{data.year}</h2>
+                        <h2 className="w-fit uppercasebreak-all text-balance">{data.title}</h2>
                     </div>
                     <PhotoBox images={data.images}/>
                 </div>

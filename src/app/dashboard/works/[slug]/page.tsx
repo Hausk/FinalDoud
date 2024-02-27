@@ -2,7 +2,7 @@ import { fetchWorkBySlug } from "@/actions/fetchWork";
 import { PhotoBox } from "@/components/dashboard/PhotoBox";
 import SlugDropzone from "@/components/dashboard/slugDropzone";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { PlusIcon } from "@radix-ui/react-icons";
 import { notFound } from 'next/navigation'
 

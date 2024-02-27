@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils';
 import { useEffect, useState } from 'react';
 import DropzoneComponent, { useDropzone } from 'react-dropzone'
 import { now } from 'moment';
-import { uploadFile, uploadWork } from '@/actions/uploadImage';
+import { createWork, uploadWork } from '@/actions/create';
 import { Image as Img } from '@prisma/client';
 import { motion } from 'framer-motion'
 import { XIcon } from 'lucide-react';
@@ -76,26 +76,21 @@ export default function Dropzone() {
         const title = titleInput.value;
         const timeStamp = now()
         if(loading) return;
+        //Création Work + retourne workId
+        const workId = await createWork(title)
         const data = await Promise.all(selectedFile.map(async (file: any) => {
             const imageName = `${timeStamp}-${file.file.name}`;
-            const imagePath = `/images/${timeStamp}-${file.file.name}`;
-            const form = new FormData();
-            form.append('file', file.file);
-            form.append('imagePath', imagePath);
-            const res = await fetch('/dashboard/api/upload', {
-                method: 'POST',
-                body: form,
-            })
-            if(!res.ok) throw new Error(await res.text())
-            return {
+            const fileData = await file.file.arrayBuffer();
+            const datum = {
                 fileName: imageName,
-                src: imagePath,
-                width: file.width,
-                height: file.height
+                width: file.width as number,
+                height: file.height as number,
+                file: Buffer.from(fileData) as Buffer
             }
+            return await uploadWork(datum, workId)
         }))
         try {
-            const create = await uploadWork(data, title)
+            //return await uploadWork(data, 'test2')
         } catch (e: any) {
             console.error(e)
         }

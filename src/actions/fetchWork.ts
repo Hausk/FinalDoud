@@ -16,7 +16,16 @@ export async function fetchWorkBySlug(slug:string) {
             images: true,
         },
     })
-    return workBySlug
+    if (!workBySlug) return false;
+    // Convertir src de chaque image en base64
+    const imagesWithBase64 = workBySlug.images.map(image => ({
+        ...image,
+        src: image.src.toString('base64'),
+    }));
+    return {
+        ...workBySlug,
+        images: imagesWithBase64,
+    };
 }
 
 export async function fetchWorkId(slug:string) {

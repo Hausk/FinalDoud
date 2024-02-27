@@ -51,11 +51,12 @@ export function PhotoBox({data}: {data: any}) {
             )}
           </div>
           <Image
-            src={image.src}
+            src={`data:image/jpeg;base64,${(image.src)}`}
             alt={image.id}
             width={image.width}
             height={image.height}
             className={"h-auto w-full object-cover aspect-square"}
+            loading="eager"
           />
         </div>
         </div>

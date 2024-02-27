@@ -1,6 +1,7 @@
 'use server'
 import prisma from '@/lib/prisma'
 import { Image } from '@prisma/client';
+import { Blob } from 'buffer';
 import fs, { existsSync, mkdir, mkdirSync } from 'fs';
 import { writeFile } from "fs/promises";
 import path, { join } from 'path';
@@ -66,4 +67,16 @@ export async function deleteImage(image: any) {
         return false;
     }
     return true;
+}
+
+export async function saveFileToDatabase(data: Buffer) {
+    return prisma.file.create({
+        data: {
+            data: Buffer.from(data.data),
+        },
+    });
+}
+export async function getAllImages() {
+    const images = await prisma.image.findMany({});
+    return images.map(image => `data:image/jpeg;base64,${image.data.toString('base64')}`);
 }

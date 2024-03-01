@@ -86,21 +86,21 @@ export function NavBar() {
               <div className="flex justify-between">
                 <Link
                   href="https://m.facebook.com/profile.php?id=100072519471892"
-                  className="transition duration-150 ease-in-out hover:text-blue-500 m-auto"
+                  className="transition duration-150 ease-in-out hover:text-red-500 m-auto"
                   target='blank'
                 >
                   <FaFacebook size={24} className='m-auto' />
                 </Link>
                 <Link
                   href="https://www.instagram.com/libre_vivant_photographie/?igshid=YmMyMTA2M2Y%3D"
-                  className="transition duration-150 ease-in-out hover:text-orange-500 m-auto mx-5"
+                  className="transition duration-150 ease-in-out hover:text-red-500 m-auto mx-5"
                   target='blank'
                 >
                   <FaInstagram size={24} className='m-auto'/>
                 </Link>
                 <Link
                   href="https://www.tiktok.com/@libre_vivant"
-                  className="transition duration-150 ease-in-out hover:text-slate-500 m-auto"
+                  className="transition duration-150 ease-in-out hover:text-red-500 m-auto"
                   target='blank'
                 >
                 <FaTiktok size={24} className='m-auto' />
@@ -109,10 +109,10 @@ export function NavBar() {
               <div className="hidden items-center md:flex">
               </div>
               <div className="hidden sm:ml-6 sm:block">
-                <div className="flex space-x-4 w-full">
-                  <Link href="/" className="transition duration-150 ease-in-out bg-transparent text-foreground hover:bg-red-500 rounded-md px-3 py-2 text-sm font-medium">Accueil</Link>
-                  <Link href="/works" className="transition duration-150 ease-in-out bg-transparent text-foreground hover:bg-red-500 rounded-md px-3 py-2 text-sm font-medium">Projets</Link>
-                  <Link href="/contact" className="transition duration-150 ease-in-out bg-transparent text-foreground hover:bg-red-500 rounded-md px-3 py-2 text-sm font-medium">Me contacter</Link>
+                <div className="flex space-x-4 w-full navigation">
+                  <Link href="/" className={cn("relative transition duration-150 ease-in-out bg-transparent text-foreground px-3 py-2 text-sm font-medium", pathName == '/' ? 'current-link' : '')}>Accueil</Link>
+                  <Link href="/works" className={cn("relative transition duration-150 ease-in-out bg-transparent text-foreground px-3 py-2 text-sm font-medium", pathName.startsWith('/works') ? 'current-link' : '')}>Projets</Link>
+                  <Link href="/contact" className={cn("relative transition duration-150 ease-in-out bg-transparent text-foreground px-3 py-2 text-sm font-medium", pathName == '/contact' ? 'current-link' : '')}>Me contacter</Link>
                 </div>
               </div>
             </div>

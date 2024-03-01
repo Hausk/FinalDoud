@@ -10,6 +10,7 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { Button } from '../ui/button';
 import { DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '../ui/dialog';
 import { useToast } from "@/components/ui/use-toast"
+import NextImage from 'next/image';
 
 export default function SlugDropzone({ workId }: {workId: number}) {
     const { toast } = useToast()
@@ -141,7 +142,7 @@ export default function SlugDropzone({ workId }: {workId: number}) {
                                                 delay: index / 20
                                             }}
                                         >
-                                            <img
+                                            <NextImage
                                                 src={file.preview}
                                                 alt={file.name}
                                                 className='w-full m-auto rounded-sm'

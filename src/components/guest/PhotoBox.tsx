@@ -13,6 +13,7 @@ import Slideshow from "yet-another-react-lightbox/plugins/slideshow";
 import Counter from "yet-another-react-lightbox/plugins/counter";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
 import NextJsImage from "./renderNextImage";
+import LightBoxNextJsImage from "./nextJsImage";
 
 export function PhotoBox({images}: {images: any}) {
     const [index, setIndex] = useState(-1);
@@ -30,6 +31,7 @@ export function PhotoBox({images}: {images: any}) {
         open={index >= 0}
         index={index}
         close={() => setIndex(-1)}
+        render={{ slide: LightBoxNextJsImage }}
         // enable optional lightbox plugins
         plugins={[Fullscreen, Slideshow, Counter]}
       />

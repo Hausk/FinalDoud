@@ -17,7 +17,6 @@ export default async function Page() {
             <NavBar />
             <div className="w-full h-screen flex">
                 <div className="card card-side bg-base-100 shadow-xl m-auto">
-                    <figure><img src={session?.user.image ?? ''} alt="Movie"/></figure>
                     <div className="card-body">
                         <h2 className="card-title">{session?.user.email ?? ''}</h2>
                         <p>{session?.user.name ?? ''}</p>

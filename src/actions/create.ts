@@ -9,7 +9,6 @@ export async function createWork(workTitle: string) {
             title: workTitle,
             slug: slug,
             updatedAt: new Date(),
-            pinnedImage: '',
         }
     })
     return work.id;
@@ -23,7 +22,8 @@ export async function uploadWork(image: any, workId: number) {
             fileName: image.fileName,
             src: Buffer.from(image.file.data),
             width: image.width,
-            height: image.height
+            height: image.height,
+            pinned: false,
         }
     });
     return true;

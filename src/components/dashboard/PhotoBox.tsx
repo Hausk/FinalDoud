@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { pinWorkImage } from "@/actions/fetchWork";
+import { pinWorkImage } from "@/actions/update";
 import { deleteImage } from "@/actions/uploadImage";
 import { Star, Trash } from "lucide-react";
 
@@ -12,7 +12,7 @@ export function PhotoBox({data}: {data: any}) {
   const [loading, setLoading] = useState(false);
   const [imageVisible, setImageVisible] = useState(true); // Ajout de l'état de visibilité de l'image
   const pinImage = async (image: any) => {
-    await pinWorkImage(image.workId, image.src);
+    await pinWorkImage(image.id);
     setPinnedImage(image);
   };
   const deleteWorkImage = async (image: any) => {
@@ -40,7 +40,7 @@ export function PhotoBox({data}: {data: any}) {
         <div className="overflow-hidden rounded-md relative w-full">
           <div className="w-full flex justify-between absolute top-2 left-0 z-50">
             <button className="bg-red-500 ml-2 p-2 rounded-full" onClick={() => { pinImage(image) }}>
-              <Star size={32} className="" fill={image.src == data.pinnedImage ? "yellow" : "white"} />
+              <Star size={32} className="" fill={image.pinned ? "yellow" : "white"} />
             </button>
             {loading ? (
               <span className="loading loading-dots loading-md"></span>

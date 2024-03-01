@@ -29,7 +29,7 @@ model Image {
   workId    Int
   width     Int
   height    Int
-  pinned    Boolean   @unique @default(false)
+  pinned    Boolean   @default(false)
 }
 
 model File {

@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { AlbumArtwork } from "./album-artwork";
-import { fetchWorksList } from "@/actions/fetchWork";
+import { fetchWorksList } from "@/actions/get";
 import { Dialog, DialogTrigger } from "../ui/dialog";
 import Dropzone from "./dropzone";
+
 
 export default async function WorksList() {
     const works = await fetchWorksList()
@@ -36,7 +37,7 @@ export default async function WorksList() {
                 <DialogTrigger asChild>
                   <Button>Ajouter une catégorie</Button>
                 </DialogTrigger>
-                <Dropzone />
+                <Dropzone/>
               </Dialog>
             </div>
           </div>

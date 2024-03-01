@@ -1,4 +1,5 @@
 import { fetchWorkBySlug } from "@/actions/fetchWork";
+import { fetchRelatedImages } from "@/actions/get";
 import { PhotoBox } from "@/components/dashboard/PhotoBox";
 import SlugDropzone from "@/components/dashboard/slugDropzone";
 import { Button } from "@/components/ui/button";
@@ -7,7 +8,7 @@ import { PlusIcon } from "@radix-ui/react-icons";
 import { notFound } from 'next/navigation'
 
 export default async function Page({ params }: {params: {slug: string}}) {
-    const data = await fetchWorkBySlug(params.slug)
+    const data = await fetchRelatedImages(params.slug)
     if (!data) {
         notFound()
     }

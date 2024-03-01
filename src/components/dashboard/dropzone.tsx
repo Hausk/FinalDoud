@@ -1,22 +1,24 @@
 'use client'
 import { cn } from '@/lib/utils';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import DropzoneComponent, { useDropzone } from 'react-dropzone'
 import { now } from 'moment';
 import { createWork, uploadWork } from '@/actions/create';
-import { Image as Img } from '@prisma/client';
 import { motion } from 'framer-motion'
 import { XIcon } from 'lucide-react';
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Button } from '../ui/button';
-import { DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '../ui/dialog';
+import { DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '../ui/dialog';
 import { Label } from '../ui/label';
 import { Input } from '../ui/input';
 import { useToast } from "@/components/ui/use-toast"
+import NextImage from 'next/image';
 
 export default function Dropzone() {
     const { toast } = useToast()
     const [loading, setLoading] = useState(false)
+    const [created, setCreated] = useState(false)
+    const [number, incNumber] = useState(0)
     const [files, setFiles] = useState<Array<File & { preview: string }>>([]);
     const [preview, setPreview] = useState([]) as any;
     const [filing, setFiling] = useState([]) as any;
@@ -72,13 +74,15 @@ export default function Dropzone() {
     }
 
     const uploadPost = async (selectedFile: any) => {
+        setCreated(false);
+        if(loading) return;
+        setLoading(true);
         const titleInput = document.getElementById('title') as HTMLInputElement;
         const title = titleInput.value;
         const timeStamp = now()
-        if(loading) return;
         //Création Work + retourne workId
         const workId = await createWork(title)
-        const data = await Promise.all(selectedFile.map(async (file: any) => {
+        const data = await Promise.all(selectedFile.map(async (file: any, index: number) => {
             const imageName = `${timeStamp}-${file.file.name}`;
             const fileData = await file.file.arrayBuffer();
             const datum = {
@@ -87,14 +91,15 @@ export default function Dropzone() {
                 height: file.height as number,
                 file: Buffer.from(fileData) as Buffer
             }
+            incNumber(index);
             return await uploadWork(datum, workId)
         }))
         try {
-            //return await uploadWork(data, 'test2')
+            setLoading(false);
+            setCreated(true);
         } catch (e: any) {
             console.error(e)
         }
-        setLoading(true);
     }
 
     return (
@@ -155,7 +160,7 @@ export default function Dropzone() {
                                                 delay: index / 20
                                             }}
                                         >
-                                            <img
+                                            <NextImage
                                                 src={file.preview}
                                                 alt={file.name}
                                                 className='w-full m-auto rounded-sm'
@@ -173,7 +178,17 @@ export default function Dropzone() {
                 }}
             </DropzoneComponent>
             <DialogFooter>
-                <Button type="submit" onClick={onValidate}>Sauvegarder</Button>
+                {loading && !created && <Button className="">
+                    <p>{number} | {preview.length}</p><span className="loading loading-ring loading-lg"></span>
+                </Button>}
+                {!loading && !created && <Button type="submit" onClick={onValidate}>
+                    Sauvegarder
+                </Button>}
+                {!loading && created && <DialogClose asChild>
+                    <Button type="button">
+                        Fermer
+                    </Button>
+                </DialogClose>}
             </DialogFooter>
         </DialogContent>
     )

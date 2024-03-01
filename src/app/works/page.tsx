@@ -1,5 +1,5 @@
 import { Caroussel } from "@/components/guest/Swiper";
-import { fetchWorksList } from "@/actions/fetchWork";
+import { fetchWorksList } from "@/actions/get";
 import { NavBar } from "@/components/guest/NavBar";
 
 export default async function Page() {

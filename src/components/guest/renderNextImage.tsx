@@ -16,7 +16,7 @@ export default function NextJsImage({
         >
         <Image
             fill
-            src={photo}
+            src={`data:image/jpeg;base64,${(photo.src)}`}
             placeholder={"blurDataURL" in photo ? "blur" : undefined}
             {...{ alt, title, sizes, className, onClick }}
         />

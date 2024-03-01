@@ -1,7 +1,6 @@
 import { notFound } from 'next/navigation'
 import { PhotoBox } from "@/components/guest/PhotoBox";
-import photos from "@/lib/phototest";
-import { fetchWorkBySlug } from "@/actions/fetchWork";
+import { fetchWorkBySlug } from "@/actions/get";
 import { NavBar } from '@/components/guest/NavBar';
 
 export default async function Page({ params }: {params: {slug: string}}) {

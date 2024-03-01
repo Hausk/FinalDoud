@@ -1,4 +1,3 @@
-import { fetchWorkBySlug } from "@/actions/fetchWork";
 import { fetchRelatedImages } from "@/actions/get";
 import { PhotoBox } from "@/components/dashboard/PhotoBox";
 import SlugDropzone from "@/components/dashboard/slugDropzone";

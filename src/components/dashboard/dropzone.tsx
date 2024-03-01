@@ -47,7 +47,6 @@ export default function Dropzone() {
             reader.onabort = () => console.log("Lecture du fichier annulé");
             reader.onerror = () => console.log("Erreur de lecture du fichié");
             reader.onload = async () => {
-                //await uploadPost(file);
                 const imgInfos = await getImageDimensions(file);
                 if (!preview.some((previewFile: any) => previewFile.name === file.name)) {
                     // Ajouter le fichier à la prévisualisation uniquement s'il n'existe pas déjà

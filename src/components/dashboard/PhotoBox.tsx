@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { pinWorkImage } from "@/actions/update";
-import { deleteImage } from "@/actions/uploadImage";
+import { deleteImage } from "@/actions/delete";
 import { Star, Trash } from "lucide-react";
 
 export function PhotoBox({data}: {data: any}) {

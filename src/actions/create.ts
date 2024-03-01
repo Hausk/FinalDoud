@@ -15,7 +15,6 @@ export async function createWork(workTitle: string) {
 }
 
 export async function uploadWork(image: any, workId: number) {
-    console.log(Buffer.from(image.file.data))
     await prisma.image.create({
         data: {
             workId: workId,

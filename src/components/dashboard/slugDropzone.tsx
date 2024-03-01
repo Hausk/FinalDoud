@@ -3,18 +3,20 @@ import { cn } from '@/lib/utils';
 import { useState } from 'react';
 import DropzoneComponent, { useDropzone } from 'react-dropzone'
 import { now } from 'moment';
-import { uploadImagesWork } from '@/actions/uploadImage';
 import { motion } from 'framer-motion'
 import { XIcon } from 'lucide-react';
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Button } from '../ui/button';
-import { DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '../ui/dialog';
+import { DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '../ui/dialog';
 import { useToast } from "@/components/ui/use-toast"
 import NextImage from 'next/image';
+import { uploadWork } from '@/actions/create';
 
 export default function SlugDropzone({ workId }: {workId: number}) {
     const { toast } = useToast()
     const [loading, setLoading] = useState(false)
+    const [created, setCreated] = useState(false)
+    const [number, incNumber] = useState(0)
     const [files, setFiles] = useState<Array<File & { preview: string }>>([]);
     const [preview, setPreview] = useState([]) as any;
     const maxSize = 20971520;
@@ -70,30 +72,24 @@ export default function SlugDropzone({ workId }: {workId: number}) {
     const uploadPost = async (selectedFile: any) => {
         const timeStamp = now()
         if(loading) return;
-        const data = await Promise.all(selectedFile.map(async (file: any) => {
+        const data = await Promise.all(selectedFile.map(async (file: any, index: number) => {
             const imageName = `${timeStamp}-${file.file.name}`;
-            const imagePath = `/images/${timeStamp}-${file.file.name}`;
-            const form = new FormData();
-            form.append('file', file.file);
-            form.append('imagePath', imagePath);
-            const res = await fetch('/dashboard/api/upload', {
-                method: 'POST',
-                body: form,
-            })
-            if(!res.ok) throw new Error(await res.text())
-            return {
+            const fileData = await file.file.arrayBuffer();
+            const datum = {
                 fileName: imageName,
-                src: imagePath,
-                width: file.width,
-                height: file.height
+                width: file.width as number,
+                height: file.height as number,
+                file: Buffer.from(fileData) as Buffer
             }
+            incNumber(index);
+            return await uploadWork(datum, workId)
         }))
         try {
-            const create = await uploadImagesWork(data, workId)
+            setLoading(false);
+            setCreated(true);
         } catch (e: any) {
             console.error(e)
         }
-        setLoading(true);
     }
 
     return (
@@ -160,7 +156,17 @@ export default function SlugDropzone({ workId }: {workId: number}) {
                 }}
             </DropzoneComponent>
             <DialogFooter>
-                <Button type="submit" onClick={onValidate}>Sauvegarder</Button>
+            {loading && !created && <Button className="">
+                    <p>{number} | {preview.length}</p><span className="loading loading-ring loading-lg"></span>
+                </Button>}
+                {!loading && !created && <Button type="submit" onClick={onValidate}>
+                    Sauvegarder
+                </Button>}
+                {!loading && created && <DialogClose asChild>
+                    <Button type="button">
+                        Fermer
+                    </Button>
+                </DialogClose>}
             </DialogFooter>
         </DialogContent>
     )

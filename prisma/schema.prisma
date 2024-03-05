@@ -24,17 +24,12 @@ model Image {
   id        Int       @id @default(autoincrement())
   fileName  String    @unique
   createdAt DateTime  @default(now())
-  src       Bytes
+  src       String
   work      Work      @relation(fields: [workId], references: [id])
   workId    Int
   width     Int
   height    Int
   pinned    Boolean   @default(false)
-}
-
-model File {
-  id    Int    @id @default(autoincrement())
-  data  Bytes
 }
 
 model HomePage {

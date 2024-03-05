@@ -5,7 +5,10 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { pinWorkImage } from "@/actions/update";
 import { deleteImage } from "@/actions/delete";
-import { Star, Trash } from "lucide-react";
+import { LogOut, PenIcon, Star, Trash } from "lucide-react";
+import { CldImage } from "next-cloudinary";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuTrigger } from "../ui/dropdown-menu";
+import { Button } from "../ui/button";
 
 export function PhotoBox({data}: {data: any}) {
   const [pinnedImage, setPinnedImage] = useState<any>(null);
@@ -32,26 +35,35 @@ export function PhotoBox({data}: {data: any}) {
       }
     }
   };
+  const onDelete = async (image: File) => {
+    console.log(image);
+  } 
   return (
     <>
     <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
-      {data.images.map((image: any, index: number) => (
+      {data.images.map((image: any) => (
         <div key={image.id} className={cn("space-y-3", imageVisible ? 'block' : 'hidden')}>
         <div className="overflow-hidden rounded-md relative w-full">
-          <div className="w-full flex justify-between absolute top-2 left-0 z-50">
-            <button className="bg-red-500 ml-2 p-2 rounded-full" onClick={() => { pinImage(image) }}>
-              <Star size={32} className="" fill={image.pinned ? "yellow" : "white"} />
-            </button>
-            {loading ? (
-              <span className="loading loading-dots loading-md"></span>
-            ) : (
-              <button className="bg-red-500 mr-2 p-2 rounded-full" onClick={() => handleDeleteClick(image)}>
-                <Trash size={32} fill="white" />
-              </button>
-            )}
+          <div className="absolute right-2 top-2">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline">Action</Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-full">
+              <DropdownMenuItem onClick={() => onDelete(image)}>
+                <Trash className="mr-2 h-4 w-4 text-red-500" />
+                <span className="text-red-500">Supprimer</span>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>
+                <Star className="mr-2 h-4 w-4" />
+                <span>Épingler</span>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
           </div>
-          <Image
-            src={`data:image/jpeg;base64,${(image.src)}`}
+          <CldImage
+            src={image.src}
             alt={image.id}
             width={image.width}
             height={image.height}

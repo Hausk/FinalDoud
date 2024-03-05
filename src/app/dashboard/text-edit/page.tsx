@@ -1,6 +1,7 @@
 'use client'
-
+import { CldImage } from 'next-cloudinary';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { CldUploadWidget } from 'next-cloudinary';
 
 export default function Page() {
     const homepageContent = 'Bonjour, je suis Victoria, une photographe passionnée par la création de souvenirs heureux et émotionnels à travers mes photos. Je suis là pour immortaliser vos moments spéciaux et les rendre encore plus mémorables.'
@@ -18,7 +19,27 @@ export default function Page() {
                     <p className="text-current text-pretty text-1xl" contentEditable="true">{homepageContent}</p>
                 </TabsContent>
                 <TabsContent value="hp-image" className="space-y-4">
-                    <h1>Image</h1>
+                <CldImage
+                    width="600"
+                    height="600"
+                    src="sample"
+                    alt="tttt"
+                />
+ 
+                <CldUploadWidget 
+                    uploadPreset="librevivant"
+                    options={{
+                        sources: ['local', 'url'],
+                        multiple: true
+                    }}>
+                {({ open }) => {
+                    return (
+                    <button onClick={() => open()}>
+                        Upload an Image
+                    </button>
+                    );
+                }}
+                </CldUploadWidget>
                 </TabsContent>
             </Tabs>
         </>

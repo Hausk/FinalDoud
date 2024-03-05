@@ -52,30 +52,9 @@ export async function fetchRelatedImages(workSlug: string) {
             images: true,
         },
     })
-    if (!workBySlug) return false;
-    const sortedImages = workBySlug.images.sort((a, b) => {
-        // Si l'image a le attribut pinned à true, la placer avant dans la liste
-        if (a.pinned && !b.pinned) {
-            return -1;
-        }
-        // Si l'image a le attribut pinned à false, la placer après dans la liste
-        if (!a.pinned && b.pinned) {
-            return 1;
-        }
-        // Sinon, maintenir l'ordre existant
-        return 0;
-    });
-    // Convertir src de chaque image en base64
-    const imagesWithBase64 = workBySlug.images.map(image => ({
-        ...image,
-        src: image.src.toString('base64'),
-    }));
-    return {
-        ...workBySlug,
-        images: imagesWithBase64,
-    };
+    return workBySlug;
 }
-export async function fetchWorkBySlug(slug:string) {
+export async function fetchWorkBySlug(slug: string) {
     const workBySlug = await prisma.work.findFirst({
         where: {
             slug: slug,
@@ -94,4 +73,9 @@ export async function fetchWorkBySlug(slug:string) {
         ...workBySlug,
         images: imagesWithBase64,
     };
+}
+
+export async function getDbImages() {
+    const images = await prisma.image.findMany({})
+    return images;
 }

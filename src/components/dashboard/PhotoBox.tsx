@@ -1,14 +1,14 @@
 'use client'
 import { useEffect, useState } from "react";
 
-import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { pinWorkImage } from "@/actions/update";
-import { deleteImage } from "@/actions/delete";
-import { LogOut, PenIcon, Star, Trash } from "lucide-react";
+import { deleteFile } from "@/actions/delete";
+import { Star, Trash } from "lucide-react";
 import { CldImage } from "next-cloudinary";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuTrigger } from "../ui/dropdown-menu";
 import { Button } from "../ui/button";
+import { Image } from "@prisma/client";
 
 export function PhotoBox({data}: {data: any}) {
   const [pinnedImage, setPinnedImage] = useState<any>(null);
@@ -20,7 +20,7 @@ export function PhotoBox({data}: {data: any}) {
   };
   const deleteWorkImage = async (image: any) => {
     // Suppression de l'image de la base de données
-    const deleted = await deleteImage(image);
+    const deleted = await deleteFile(image);
     return deleted;
   };
 
@@ -35,8 +35,8 @@ export function PhotoBox({data}: {data: any}) {
       }
     }
   };
-  const onDelete = async (image: File) => {
-    console.log(image);
+  const onDelete = async (image: Image) => {
+    const deleteAction = await deleteFile(image);
   } 
   return (
     <>

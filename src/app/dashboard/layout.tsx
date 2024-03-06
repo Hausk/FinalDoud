@@ -1,7 +1,5 @@
 import type { Metadata } from 'next'
 import { Inter as FontSans } from "next/font/google"
-import { cn } from "@/lib/utils"
-import { ThemeProvider } from "@/components/theme-provider"
 import "./globals.css"
 import { Sidebar } from '@/components/dashboard/sidebar'
 import { playlists } from '@/lib/playlists'

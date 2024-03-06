@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss"
+import {nextui} from "@nextui-org/react";
 const { fontFamily } = require("tailwindcss/defaultTheme")
 
 const config = {
@@ -8,6 +9,7 @@ const config = {
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
+    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
 	],
   prefix: "",
   theme: {
@@ -125,7 +127,7 @@ const config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate"), require("daisyui")],
+  plugins: [require("tailwindcss-animate"), require("daisyui"), nextui()],
 } satisfies Config
 
 export default config
